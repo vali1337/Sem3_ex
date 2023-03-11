@@ -1,17 +1,25 @@
 package ro.ase.acs.classes;
 
+import ro.ase.acs.interfaces.DataInsertor;
+import ro.ase.acs.interfaces.DataReader;
+import ro.ase.acs.interfaces.TableCreator;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Orchestrator {
-    private final CreateTable createTable;
-    private InsertData insertData;
-    private final ReadData readData;
+    private final TableCreator tableCreator;
+    private DataInsertor dataInsertor;
+    private final DataReader dataReader;
 
-    public Orchestrator(CreateTable createTable, InsertData insertData, ReadData readData) {
-        this.createTable = createTable;
-        this.insertData = insertData;
-        this.readData = readData;
+    public Orchestrator(TableCreator tableCreator, DataInsertor dataInsertor, DataReader dataReader) {
+        this.tableCreator = tableCreator;
+        this.dataInsertor = dataInsertor;
+        this.dataReader = dataReader;
+    }
+
+    public void setDataInsertor(DataInsertor dataInsertor) {
+        this.dataInsertor = dataInsertor;
     }
 
     public void startFlow() {
